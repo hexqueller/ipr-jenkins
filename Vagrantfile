@@ -21,8 +21,8 @@ Vagrant.configure("2") do |config|
           vb.memory = "4096"
           vb.cpus = 4
         end
-        node.vm.box = "centos/7"
-        config.vm.box_url = "CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box"
+        node.vm.box = "centos/9"
+        config.vm.box_url = "CentOS-Stream-Vagrant-9-20230704.1.x86_64.vagrant-virtualbox.box"
         # Имя хоста
         node.vm.hostname = machine[:name]
         # IP-адрес
@@ -31,5 +31,5 @@ Vagrant.configure("2") do |config|
     end
   end
   
-  # https://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box
+  # https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-Vagrant-9-20230704.1.x86_64.vagrant-virtualbox.box
   

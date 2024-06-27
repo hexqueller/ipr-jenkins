@@ -1,12 +1,12 @@
 ---
 - name: download jenkins.repo
   get_url:
-    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    url: https://pkg.jenkins.io/redhat/jenkins.repo
     dest: /etc/yum.repos.d/jenkins.repo
     validate_certs: no
 
 - name: import jenkins key
-  command: rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+  command: rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
 
 - name: install required packages
   yum:
@@ -14,15 +14,12 @@
     state: present
   loop:
     - fontconfig
-    - java-11-openjdk
+    - java-17-openjdk
 
 - name: install jenkins
   yum:
     name: jenkins
     state: present
-
-- name: set initial admin password for Jenkins
-  command: rm -rf /var/lib/jenkins/secrets/initialAdminPassword && echo '{{ jenkins_admin_password }}' > /var/lib/jenkins/secrets/initialAdminPassword
 
 - name: start jenkins
   systemd:
