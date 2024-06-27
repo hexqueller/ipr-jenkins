@@ -1,0 +1,6 @@
+---
+- name: provide hosts
+  template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+    mode: '0644'
