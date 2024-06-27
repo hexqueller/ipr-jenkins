@@ -1,8 +1,4 @@
-- hosts: all
-  become: yes
-  roles:
-    - prepareOS
-
+---
 - hosts: jenkins
   become: yes
   roles:

@@ -1,0 +1,4 @@
+jenkins ansible_host=10.0.0.96
+
+[slave]
+slave01 ansible_host=10.0.0.95
