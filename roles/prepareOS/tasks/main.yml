@@ -1,4 +1,42 @@
 ---
+- name: Create user
+  user:
+    name: "{{ default_user }}"
+    createhome: true
+    shell: "/bin/bash"
+    groups: wheel
+    append: true
+    # password: "{{ default_password | password_hash('sha512') }}"
+    state: present
+
+- name: create .ssh dir
+  file: state=directory dest="/home/{{ default_user }}/.ssh" owner={{ default_user }} group={{ default_user }}
+
+- name: Copy ssh key
+  copy:
+    src: files/id_rsa
+    dest: "/home/{{ default_user }}/.ssh/id_rsa"
+    owner: "{{ default_user }}"
+    group: "{{ default_user }}"
+    mode: '0644'
+  when: inventory_hostname == 'jenkins'
+
+- name: Copy pub key
+  copy:
+    src: files/id_rsa.pub
+    dest: "/home/{{ default_user }}/.ssh/id_rsa.pub"
+    owner: "{{ default_user }}"
+    group: "{{ default_user }}"
+    mode: '0644'
+  when: inventory_hostname != 'jenkins'
+
+- name: install default packages
+  yum:
+    name: "{{ item }}"
+    state: "present"
+  loop:
+    - vim
+
 - name: provide hosts
   template:
     src: templates/hosts.j2

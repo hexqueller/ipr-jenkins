@@ -1,2 +1,3 @@
 ---
-# defaults file for newOS
+default_user: kreet
+default_password: "2911"
