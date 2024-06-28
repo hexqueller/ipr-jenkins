@@ -9,5 +9,5 @@ services:
       - "8080:8080"
       - "50000:50000"
     environment:
-      - CASC_JENKINS_CONFIG=https://raw.githubusercontent.com/hexqueller/IPR/master/jenkins-minimal-example.yaml
+      - CASC_JENKINS_CONFIG=https://raw.githubusercontent.com/hexqueller/IPR/master/jenkins-config.yaml
     user: root
