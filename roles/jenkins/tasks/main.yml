@@ -14,7 +14,6 @@
     state: present
   loop:
     - fontconfig
-    - java-17-openjdk
 
 - name: install jenkins
   yum:
