@@ -43,10 +43,10 @@ jenkins:
   viewsTabBar: "standard"
 appearance:
   prism:
-    theme: DARK
+    theme: PRISM
   themeManager:
     disableUserThemes: false
-    theme: "dark"
+    theme: "darkSystem"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
