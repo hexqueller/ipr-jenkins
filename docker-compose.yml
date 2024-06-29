@@ -5,7 +5,6 @@ services:
     restart: always
     volumes:
       - ./data:/var/jenkins_home
-      - ./ssh:/var/jenkins_home/.ssh
     ports:
       - "8080:8080"
       - "50000:50000"
