@@ -1,3 +1,14 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          id: "2198bf1d-245a-4152-9255-9b6508bd4bc4"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: GLOBAL
+          username: "jenkins"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -8,6 +19,7 @@ jenkins:
   disableRememberMe: false
   labelAtoms:
   - name: "built-in"
+  - name: "docker-agent01"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -22,7 +34,19 @@ jenkins:
       freeSpaceThreshold: "1GiB"
       freeSpaceWarningThreshold: "2GiB"
   - "responseTime"
-  numExecutors: 2
+  nodes:
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: "2198bf1d-245a-4152-9255-9b6508bd4bc4"
+          host: "docker-ssh-agent"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      name: "docker-agent01"
+      numExecutors: 2
+      remoteFS: "/home/jenkins"
+      retentionStrategy: "always"
+  numExecutors: 0
   primaryView:
     all:
       name: "all"
@@ -41,6 +65,10 @@ jenkins:
   - all:
       name: "all"
   viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
 appearance:
   prism:
     theme: PRISM
