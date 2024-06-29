@@ -1,2 +1,4 @@
 jenkins:
   systemMessage: "CasC enabled!"
+  plugins:
+    - dark-theme:479.v661b_1b_911c01
