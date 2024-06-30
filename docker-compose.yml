@@ -4,18 +4,13 @@ services:
     build: ./jenkinsCasC
     restart: always
     volumes:
-      - ./data:/var/jenkins_home
+      - ./data:/var/jenkins_home:rw
     ports:
       - "8080:8080"
-      - "50000:50000"
     environment:
       - CASC_JENKINS_CONFIG=https://raw.githubusercontent.com/hexqueller/IPR/master/jenkins-config.yaml
     depends_on:
       - docker-ssh-agent
-    user: root
-    command: >
-      sh -c "chown -R jenkins:jenkins /var/jenkins_home && 
-             gosu jenkins /usr/local/bin/jenkins.sh"
 
   docker-ssh-agent:
     image: jenkins/ssh-agent
