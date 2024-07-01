@@ -46,6 +46,7 @@ jenkins:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
   disabledAdministrativeMonitors:
+  - "jenkins.diagnostics.SecurityIsOffMonitor"
   - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"

@@ -22,9 +22,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building project...'
-                sh 'gradle build'
-                echo 'Build completed.'
+                echo 'Checking out build repository...'
+                dir('/home/jenkins/build-repo') {
+                    git branch: 'main', url: 'https://github.com/cloudacademy/devops-webapp.git'
+                }
+                echo 'Building project from build repository...'
+                dir('/home/jenkins/build-repo') {
+                    sh 'gradle build'
+                }
+                echo 'Build completed from build repository.'
             }
         }
 
