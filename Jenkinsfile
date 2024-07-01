@@ -12,9 +12,9 @@ pipeline {
             steps {
                 echo 'Installing Gradle...'
                 sh '''
-                wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
-                unzip gradle-${GRADLE_VERSION}-bin.zip -d ${env.WORKSPACE}
-                mv gradle-${GRADLE_VERSION} ${GRADLE_HOME}
+                wget -P /tmp https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
+                unzip /tmp/gradle-${GRADLE_VERSION}-bin.zip -d /tmp
+                mv /tmp/gradle-${GRADLE_VERSION} ${GRADLE_HOME}
                 '''
                 echo 'Gradle installed.'
             }
