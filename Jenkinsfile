@@ -57,3 +57,4 @@ pipeline {
         }
         success {
             echo 'Success!'
+        }
