@@ -45,12 +45,15 @@ jenkins:
     standard:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
   - name: "docker-agent01"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
+  noUsageStatistics: true
   nodeMonitors:
   - "architecture"
   - "clock"
@@ -132,10 +135,13 @@ unclassified:
     checkForBuildAgentErrors: false
     enabled: false
     enforceUrl: false
+    gradleCaptureTaskInputFiles: true
     injectCcudExtension: false
     injectMavenExtension: false
+    mavenCaptureGoalInputFiles: true
   location:
     adminAddress: "адрес еще не настроен <nobody@nowhere>"
+    url: "http://localhost:8080/"
   mailer:
     charset: "UTF-8"
     useSsl: false

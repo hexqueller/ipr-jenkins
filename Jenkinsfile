@@ -52,9 +52,13 @@ pipeline {
     post {
         always {
             echo 'Cleaning workspace...'
-            // Очистка рабочих пространств
             cleanWs()
         }
         success {
             echo 'Success!'
         }
+        failure {
+            echo 'Build or deploy failed.'
+        }
+    }
+}

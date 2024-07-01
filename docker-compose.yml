@@ -10,6 +10,7 @@ services:
       - "8080:8080"
     environment:
       - CASC_JENKINS_CONFIG=https://raw.githubusercontent.com/hexqueller/IPR/master/jenkins-config.yaml
+      - TZ=Europe/Moscow
     depends_on:
       - docker-ssh-agent
 
