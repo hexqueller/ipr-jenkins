@@ -23,6 +23,6 @@ services:
     build: ./tomcat
     restart: always
     ports:
-      - "80:80"
+      - "80:8080"
     depends_on:
       - jenkins
