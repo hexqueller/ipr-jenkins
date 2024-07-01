@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GRADLE_VERSION = '8.8'
-        GRADLE_HOME = "${env.WORKSPACE}/gradle"
+        GRADLE_HOME = "/home/jenkins/workspace/gradle"
         PATH = "$GRADLE_HOME/bin:$PATH"
     }
 
@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                 wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
                 unzip gradle-${GRADLE_VERSION}-bin.zip -d ${env.WORKSPACE}
-                mv ${env.WORKSPACE}/gradle-${GRADLE_VERSION} ${env.WORKSPACE}/gradle
+                mv gradle-${GRADLE_VERSION} ${GRADLE_HOME}
                 '''
                 echo 'Gradle installed.'
             }
