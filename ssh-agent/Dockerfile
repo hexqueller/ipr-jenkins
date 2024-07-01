@@ -1,5 +1,5 @@
-FROM jenkins/ssh-agent:latest
+FROM jenkins/ssh-agent:latest-debian-jdk21
 
-COPY wget.deb /tmp/wget.deb
+RUN echo 'deb http://deb.debian.org/debian bookworm main' > /etc/apt/sources.list
 
-RUN dpkg -i /tmp/wget.deb
+RUN apt-get update && apt-get install -y wget unzip
