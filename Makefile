@@ -6,5 +6,5 @@ clean:
 run:
 	docker-compose down && docker-compose up
 
-restart: clean
+restart:
 	docker-compose down && docker-compose up --build
