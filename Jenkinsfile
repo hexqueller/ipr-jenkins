@@ -61,6 +61,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning workspace...'
+            rm -rf /home/jenkins/*
             cleanWs()
         }
         success {
