@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Checking out build repository...'
                 dir('/home/jenkins/build-repo') {
-                    git branch: 'master', url: 'https://github.com/cloudacademy/devops-webapp.git'
+                    git branch: 'master', url: 'https://github.com/hexqueller/devops-webapp.git'
                 }
                 echo 'Building project from build repository...'
                 dir('/home/jenkins/build-repo') {
