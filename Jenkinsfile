@@ -52,8 +52,8 @@ pipeline {
                 scp -o StrictHostKeyChecking=no /home/jenkins/build-repo/build/libs/build-repo-1.0.war root@tomcat:/usr/local/tomcat/webapps/
 
                 ssh -o StrictHostKeyChecking=no root@tomcat <<EOF
-                systemctl stop tomcat
-                systemctl start tomcat
+                /scripts/stop-tomcat.sh
+                /scripts/start-tomcat.sh
                 EOF
                 '''
                 echo 'Deployment completed.'
