@@ -61,7 +61,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning workspace...'
-            sh "rm -rf /home/jenkins/*"
+            sh "rm -rf /home/jenkins/* && rm -rf /tmp/gradle*"
             cleanWs()
         }
         success {
