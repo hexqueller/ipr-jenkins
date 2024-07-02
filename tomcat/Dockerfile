@@ -14,9 +14,8 @@ RUN echo 'deb http://ru.archive.ubuntu.com/ubuntu/ jammy main restricted' > /etc
     echo '#!/bin/bash' > /scripts/start-tomcat.sh && \
     echo 'export JAVA_HOME=/opt/java/openjdk' >> /scripts/start-tomcat.sh && \
     echo 'export JRE_HOME=/opt/java/openjdk' >> /scripts/start-tomcat.sh && \
-    echo '/usr/local/tomcat/bin/catalina.sh start' >> /scripts/start-tomcat.sh
+    echo '/usr/local/tomcat/bin/catalina.sh start' >> /scripts/start-tomcat.sh && \
+    chmod +x /scripts/start-tomcat.sh
 
-# ENV JAVA_HOME /opt/java/openjdk
-# ENV JRE_HOME /opt/java/openjdk
 
 CMD ["/usr/sbin/sshd", "-D"]
