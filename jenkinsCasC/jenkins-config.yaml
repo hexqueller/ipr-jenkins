@@ -165,3 +165,14 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
+
+jobs:
+  - script: >
+      multibranchPipelineJob('master-git') {
+          branchSources {
+              git {
+                  id = 'master-git'
+                  remote('https://github.com/hexqueller/IPR.git')
+              }
+          }
+      }

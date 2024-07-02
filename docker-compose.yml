@@ -20,10 +20,10 @@ services:
     environment:
       - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClDjCi8cbTwwPF109h5WpjrPT8DyuB1D2PG/DpDazRYiBnX0G57vBkJUiQj3hR6VrOJHPuQjUcULyXFr6ONkUzzMs14FBelFLJCzXEUV6oLutvbabvSpTfZIHQjw3n/7BdDpRRMRnFonbmZSTGEvm9XprHf4MNDzdo7iuCFu6462BEqVqAfE/nEu+k++oKZz4PTQGSPsIwWoLDzCQ7ilzs+UWj37kX+GQCk0msoDyOqhlhQuBnyAWnOW9Vd8zW0WUKiBZO0al9VfXNNx9iVWsdAgnlVovqvz22RhuPZSA92IeyMTGrShdzrSLnw+m3Xgz1kha5w3nlPP6NO4MvL/I7
   
-  tomcat:
-    build: ./tomcat
-    restart: always
-    ports:
-      - "80:8080"
-    depends_on:
-      - jenkins
+  # tomcat:
+  #   build: ./tomcat
+  #   restart: always
+  #   ports:
+  #     - "80:8080"
+  #   depends_on:
+  #     - jenkins
