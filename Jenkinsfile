@@ -59,7 +59,7 @@ pipeline {
                 echo 'Deployment completed.'
             }
         }
-
+    }
 
     post {
         always {
