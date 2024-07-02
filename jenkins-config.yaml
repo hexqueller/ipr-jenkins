@@ -63,33 +63,32 @@ appearance:
     disableUserThemes: false
     theme: "darkSystem"
 
-jobs:
-  - script: >
-      pipelineJob('Master-job') {
-        definition {
-          cpsScm {
-            scm {
-              git {
-                remote {
-                  url('https://github.com/hexqueller/IPR.git')
+  jobs:
+    - script: >
+        pipelineJob('Master-job') {
+          definition {
+            cpsScm {
+              scm {
+                git {
+                  remote {
+                    url('https://github.com/hexqueller/IPR.git')
+                  }
+                  branches('*/master')
                 }
-                branches('*/master')
               }
-            }
-            scriptPath('Jenkinsfile')
-          }
-        }
-        triggers {
-          scm('* * * * *') // Проверять репозиторий каждую минуту
-        }
-        properties {
-          buildDiscarder {
-            strategy {
-              logRotator {
-                numToKeepStr('3') // Оставлять только последние 3 сборки
-              }
+              scriptPath('Jenkinsfile')
             }
           }
+          triggers {
+            scm('* * * * *') // Проверять репозиторий каждую минуту
+          }
+          properties {
+            buildDiscarder {
+              strategy {
+                logRotator {
+                  numToKeepStr('3') // Оставлять только последние 3 сборки
+                }
+              }
+            }
+          }
         }
-      }
-      
