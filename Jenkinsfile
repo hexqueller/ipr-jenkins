@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GRADLE_VERSION = '8.8'
-        GRADLE_HOME = "/home/jenkins/workspace/gradle"
+        GRADLE_HOME = "${env.WORKSPACE}/gradle"
         PATH = "${GRADLE_HOME}/bin:${env.PATH}"
     }
 
@@ -61,7 +61,9 @@ pipeline {
     post {
         always {
             echo 'Cleaning workspace...'
-            sh "rm -rf /home/jenkins/* && rm -rf /tmp/gradle*"
+            dir("${env.WORKSPACE}") {
+                sh "rm -rf ${env.WORKSPACE}/* && rm -rf /tmp/gradle*"
+            }
             cleanWs()
         }
         success {
@@ -71,4 +73,4 @@ pipeline {
             echo 'Build or deploy failed.'
         }
     }
-}
+
