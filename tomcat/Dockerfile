@@ -1,6 +1,6 @@
 FROM tomcat:latest
 
-COPY ../ssh/id_rsa.pub /tmp/
+COPY id_rsa.pub /tmp/
 
 RUN mkdir -p /root/.ssh/ && \
     echo "$(cat /tmp/id_rsa.pub)" >> /root/.ssh/authorized_keys && \

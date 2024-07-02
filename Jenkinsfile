@@ -75,4 +75,3 @@ pipeline {
             echo 'Build or deploy failed.'
         }
     }
-}
