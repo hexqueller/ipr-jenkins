@@ -4,7 +4,7 @@ pipeline {
     environment {
         GRADLE_VERSION = '8.8'
         GRADLE_HOME = "/home/jenkins/workspace/gradle"
-        PATH = "$GRADLE_HOME/bin:$PATH"
+        PATH = "${GRADLE_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -15,6 +15,7 @@ pipeline {
                 wget -P /tmp https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
                 unzip /tmp/gradle-${GRADLE_VERSION}-bin.zip -d /tmp
                 mv /tmp/gradle-${GRADLE_VERSION} ${GRADLE_HOME}
+                ls -la ${GRADLE_HOME}/bin
                 '''
                 echo 'Gradle installed.'
             }
@@ -37,7 +38,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'gradle test'
+                dir('/home/jenkins/build-repo') {
+                    sh 'gradle test'
+                }
                 echo 'Tests completed.'
             }
         }
@@ -47,7 +50,7 @@ pipeline {
                 echo 'Deploying application...'
                 sh '''
                 ssh user@tomcat 'mkdir -p /path/to/your/app'
-                scp build/libs/your-app.jar user@tomcat:/path/to/your/app/
+                scp /home/jenkins/build-repo/build/libs/your-app.jar user@tomcat:/path/to/your/app/
                 ssh user@tomcat 'cd /path/to/your/app && java -jar your-app.jar &'
                 '''
                 echo 'Deployment completed.'
