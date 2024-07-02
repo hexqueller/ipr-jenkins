@@ -38,34 +38,6 @@ credentials:
           username: "jenkins"
 
 jenkins:
-  agentProtocols:
-  - "JNLP4-connect"
-  - "Ping"
-  crumbIssuer:
-    standard:
-      excludeClientIPFromCrumb: false
-  disableRememberMe: false
-  disabledAdministrativeMonitors:
-  - "jenkins.diagnostics.SecurityIsOffMonitor"
-  - "hudson.util.DoubleLaunchChecker"
-  labelAtoms:
-  - name: "built-in"
-  - name: "docker-agent01"
-  markupFormatter: "plainText"
-  mode: NORMAL
-  myViewsTabBar: "standard"
-  noUsageStatistics: true
-  nodeMonitors:
-  - "architecture"
-  - "clock"
-  - diskSpace:
-      freeSpaceThreshold: "1GiB"
-      freeSpaceWarningThreshold: "2GiB"
-  - "swapSpace"
-  - tmpSpace:
-      freeSpaceThreshold: "1GiB"
-      freeSpaceWarningThreshold: "2GiB"
-  - "responseTime"
   nodes:
   - permanent:
       launcher:
@@ -80,91 +52,17 @@ jenkins:
       numExecutors: 2
       remoteFS: "/home/jenkins"
       retentionStrategy: "always"
-  numExecutors: 0
-  primaryView:
-    all:
-      name: "all"
-  projectNamingStrategy: "standard"
-  quietPeriod: 5
-  remotingSecurity:
-    enabled: true
-  scmCheckoutRetryCount: 0
-  slaveAgentPort: 50000
   systemMessage: "CasC enabled!"
-  updateCenter:
-    sites:
-    - id: "default"
-      url: "https://updates.jenkins.io/update-center.json"
-  views:
-  - all:
-      name: "all"
-  viewsTabBar: "standard"
-globalCredentialsConfiguration:
-  configuration:
-    providerFilter: "none"
-    typeFilter: "none"
+  numExecutors: 0
+  slaveAgentPort: 50000
+
 appearance:
   prism:
     theme: PRISM
   themeManager:
     disableUserThemes: false
     theme: "darkSystem"
-security:
-  apiToken:
-    creationOfLegacyTokenEnabled: false
-    tokenGenerationOnCreationEnabled: false
-    usageStatisticsEnabled: true
-  gitHooks:
-    allowedOnAgents: false
-    allowedOnController: false
-  gitHostKeyVerificationConfiguration:
-    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
-unclassified:
-  buildDiscarders:
-    configuredBuildDiscarders:
-    - "jobBuildDiscarder"
-  enrichedSummaryConfig:
-    enrichedSummaryEnabled: false
-    httpClientDelayBetweenRetriesInSeconds: 1
-    httpClientMaxRetries: 3
-    httpClientTimeoutInSeconds: 1
-  fingerprints:
-    fingerprintCleanupDisabled: false
-    storage: "file"
-  injectionConfig:
-    allowUntrusted: false
-    checkForBuildAgentErrors: false
-    enabled: false
-    enforceUrl: false
-    gradleCaptureTaskInputFiles: true
-    injectCcudExtension: false
-    injectMavenExtension: false
-    mavenCaptureGoalInputFiles: true
-  location:
-    adminAddress: "адрес еще не настроен <nobody@nowhere>"
-    url: "http://localhost:8080/"
-  mailer:
-    charset: "UTF-8"
-    useSsl: false
-    useTls: false
-  pollSCM:
-    pollingThreadCount: 10
-  scmGit:
-    addGitTagAction: false
-    allowSecondFetch: false
-    createAccountBasedOnEmail: false
-    disableGitToolChooser: false
-    hideCredentials: false
-    showEntireCommitSummaryInChanges: false
-    useExistingAccountWithSameEmail: false
-tool:
-  git:
-    installations:
-    - home: "git"
-      name: "Default"
-  mavenGlobalConfig:
-    globalSettingsProvider: "standard"
-    settingsProvider: "standard"
+
 jobs:
   - script: >
       pipelineJob('Master-job') {
@@ -194,3 +92,4 @@ jobs:
           }
         }
       }
+      
