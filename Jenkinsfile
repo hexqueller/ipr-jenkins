@@ -50,8 +50,8 @@ pipeline {
                 echo 'Deploying application...'
                 sh '''
                 scp -o StrictHostKeyChecking=no /home/jenkins/build-repo/build/libs/build-repo-1.0.war root@tomcat:/usr/local/tomcat/webapps/
-
                 ssh -o StrictHostKeyChecking=no root@tomcat "/scripts/start-tomcat.sh"
+                '''
                 echo 'Deployment completed.'
             }
         }
