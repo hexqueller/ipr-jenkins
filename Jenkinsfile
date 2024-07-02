@@ -49,14 +49,17 @@ pipeline {
             steps {
                 echo 'Deploying application...'
                 sh '''
-                ssh user@tomcat 'mkdir -p /path/to/your/app'
-                scp /home/jenkins/build-repo/build/libs/your-app.jar user@tomcat:/path/to/your/app/
-                ssh user@tomcat 'cd /path/to/your/app && java -jar your-app.jar &'
+                scp -o StrictHostKeyChecking=no /home/jenkins/build-repo/build/libs/build-repo-1.0.war root@tomcat:/usr/local/tomcat/webapps/
+
+                ssh -o StrictHostKeyChecking=no root@tomcat <<EOF
+                systemctl stop tomcat
+                systemctl start tomcat
+                EOF
                 '''
                 echo 'Deployment completed.'
             }
         }
-    }
+
 
     post {
         always {
@@ -64,7 +67,6 @@ pipeline {
             dir("${env.WORKSPACE}") {
                 sh "rm -rf ${env.WORKSPACE}/* && rm -rf /tmp/gradle*"
             }
-            cleanWs()
         }
         success {
             echo 'Success!'
