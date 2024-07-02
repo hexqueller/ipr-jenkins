@@ -5,11 +5,14 @@ ARG JAVA_OPTS
 ENV JENKINS_HOME /var/jenkins_home
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
 
+COPY jenkins-config.yaml /user/local/jenkins-config.yaml
+
 # Установка плагинов
-RUN jenkins-plugin-cli --plugins configuration-as-code:1810.v9b_c30a_249a_4c && \
-    jenkins-plugin-cli --plugins dark-theme:479.v661b_1b_911c01 && \
-    jenkins-plugin-cli --plugins ssh-slaves:2.973.v0fa_8c0dea_f9f && \
-    jenkins-plugin-cli --plugins git:5.2.2 && \
-    jenkins-plugin-cli --plugins gradle:2.12 && \
-    jenkins-plugin-cli --plugins workflow-aggregator:596.v8c21c963d92d && \
-    jenkins-plugin-cli --plugins job-dsl:1.87
+RUN chmod 744 /user/local/jenkins-config.yaml && \
+    jenkins-plugin-cli --plugins ssh-slaves && \
+    jenkins-plugin-cli --plugins configuration-as-code && \
+    jenkins-plugin-cli --plugins dark-theme && \
+    jenkins-plugin-cli --plugins git && \
+    jenkins-plugin-cli --plugins gradle && \
+    jenkins-plugin-cli --plugins workflow-aggregator && \
+    jenkins-plugin-cli --plugins job-dsl
