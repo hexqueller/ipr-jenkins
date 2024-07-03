@@ -15,6 +15,8 @@ CI/CD
 
 4)       Сборка и деплой java-приложения (gradle или maven).
 
+web app on: http://localhost/myapp/response.jsp
+
 5)       Jenkinsfile
 
 6)       Основы языка groove в разрезе использования Jenkins (shared lib)
