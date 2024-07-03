@@ -25,11 +25,11 @@ pipeline {
             steps {
                 echo 'Checking out build repository...'
                 dir('/home/jenkins/build-repo') {
-                    git branch: 'master', url: 'https://github.com/mike-neck/gradle-sample-web.git'
+                    git branch: 'master', url: 'https://github.com/hexqueller/devops-webapp.git'
                 }
                 echo 'Building project from build repository...'
                 dir('/home/jenkins/build-repo') {
-                    sh 'gradle idea'
+                    sh 'gradle build'
                 }
                 echo 'Build completed from build repository.'
             }
