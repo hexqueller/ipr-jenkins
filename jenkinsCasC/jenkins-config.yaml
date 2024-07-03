@@ -36,7 +36,6 @@ credentials:
                 -----END RSA PRIVATE KEY-----
           scope: GLOBAL
           username: "jenkins"
-
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -119,6 +118,8 @@ security:
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
     sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
@@ -131,6 +132,19 @@ unclassified:
   fingerprints:
     fingerprintCleanupDisabled: false
     storage: "file"
+  globalLibraries:
+    libraries:
+    - defaultVersion: "master"
+      name: "default-lib"
+      retriever:
+        modernSCM:
+          libraryPath: "."
+          scm:
+            git:
+              id: "4df5e90d-b0a0-4b32-9ffc-992c26149341"
+              remote: "https://github.com/hexqueller/IPR.git"
+              traits:
+              - "gitBranchDiscovery"
   injectionConfig:
     allowUntrusted: false
     checkForBuildAgentErrors: false
@@ -165,15 +179,3 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
-
-jobs:
-  - script: >
-      multibranchPipelineJob('master-git') {
-          branchSources {
-              git {
-                  id = 'master-git'
-                  remote('https://github.com/hexqueller/IPR.git')
-              }
-          }
-      }
-      
