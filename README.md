@@ -1,6 +1,6 @@
 # ИПР Беседин ДВ
 
-Заметки и т д: https://www.notion.so/dd9ca4658835433786d335c3d89f0dc7?pvs=4
+Заметки и т д: https://www.notion.so/dd9ca4658835433786d335c3d89f0dc7?pvs=4 \
 web app on: http://localhost/myapp/response.jsp
 
 CI/CD

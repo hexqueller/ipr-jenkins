@@ -7,6 +7,10 @@ pipeline {
         PATH = "${GRADLE_HOME}/bin:${env.PATH}"
     }
 
+    triggers {
+        pollSCM('* * * * *')
+    }
+
     stages {
         stage('Install Gradle') {
             steps {
