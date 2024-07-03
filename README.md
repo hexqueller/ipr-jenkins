@@ -1,7 +1,7 @@
 # ИПР Беседин ДВ
 
-Почему я отказался от VirtualBox и Vagrant - это очень тяжелые и неповоротливые решения!\
-Каждый раз когда я поднимал - я понимал, что часть вещей все равно прийдется делать ручками, а с докером таких проблем нет :)
+Заметки и т д: https://www.notion.so/dd9ca4658835433786d335c3d89f0dc7?pvs=4
+web app on: http://localhost/myapp/response.jsp
 
 CI/CD
 
@@ -14,8 +14,6 @@ CI/CD
 3)       Настройка агентов Jenkins
 
 4)       Сборка и деплой java-приложения (gradle или maven).
-
-web app on: http://localhost/myapp/response.jsp
 
 5)       Jenkinsfile
 
