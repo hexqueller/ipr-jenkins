@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         // Получение секрета из Vault
-        API_TOKEN = vault(vaultCredentialsId: 'my-vault-config',
+        API_TOKEN = vault(vaultId: 'my-vault-config',
                           path: 'jenkins/api-token',
                           engineVersion: '2',
-                          secretValues: 'value')
+                          field: 'value')
     }
 
     stages {
