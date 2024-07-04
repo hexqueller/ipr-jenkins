@@ -27,3 +27,19 @@ services:
       - "80:8080"
     depends_on:
       - jenkins
+
+  vault:
+    image: vault:1.13.3
+    restart: always
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_LOCAL_CONFIG=/vault/config/config.hcl
+    command: sh -c "vault server -config=/vault/config/config.hcl & sleep 5 && sh /vault/init.sh; tail -f /dev/null"
+    volumes:
+      - ./vault/config.hcl:/vault/config/config.hcl
+      - ./vault/init.sh:/vault/init.sh
+    cap_add:
+      - IPC_LOCK
+    depends_on:
+      - jenkins
