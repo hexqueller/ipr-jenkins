@@ -15,4 +15,5 @@ RUN chmod 744 /user/local/jenkins-config.yaml && \
     jenkins-plugin-cli --plugins git && \
     jenkins-plugin-cli --plugins gradle && \
     jenkins-plugin-cli --plugins workflow-aggregator && \
-    jenkins-plugin-cli --plugins job-dsl
+    jenkins-plugin-cli --plugins job-dsl && \
+    jenkins-plugin-cli --plugins hashicorp-vault-plugin
