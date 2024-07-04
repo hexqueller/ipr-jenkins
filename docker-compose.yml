@@ -34,11 +34,10 @@ services:
     ports:
       - "8200:8200"
     environment:
-      - VAULT_LOCAL_CONFIG=/vault/config/config.hcl
-    command: sh -c "vault server -config=/vault/config/config.hcl & sleep 5 && sh /vault/init.sh; tail -f /dev/null"
+      - VAULT_LOCAL_CONFIG=/vault/config.hcl
+    command: sh -c "vault server -config=/vault/config.hcl & sleep 5 && sh /vault/init.sh; tail -f /dev/null"
     volumes:
-      - ./vault/config.hcl:/vault/config/config.hcl
-      - ./vault/init.sh:/vault/init.sh
+      - ./vault:/vault:rw
     cap_add:
       - IPC_LOCK
     depends_on:
