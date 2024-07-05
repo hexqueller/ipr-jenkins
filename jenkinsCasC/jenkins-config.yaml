@@ -36,6 +36,14 @@ credentials:
                 -----END RSA PRIVATE KEY-----
           scope: GLOBAL
           username: "jenkins"
+      - vaultAppRoleCredential:
+          description: "vault-jenkins-role"
+          id: "vault-jenkins-role"
+          path: "approle"
+          roleId: "1aa708ed-623b-2b65-dd07-eb037749b395"
+          scope: GLOBAL
+          secretId: "2bfa21a5-0533-e777-93ae-dcbb3d275a07"
+          usePolicies: false
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -138,13 +146,21 @@ unclassified:
       name: "default-lib"
       retriever:
         modernSCM:
-          libraryPath: "."
+          libraryPath: "./"
           scm:
             git:
               id: "4df5e90d-b0a0-4b32-9ffc-992c26149341"
               remote: "https://github.com/hexqueller/IPR.git"
               traits:
               - "gitBranchDiscovery"
+  hashicorpVault:
+    configuration:
+      disableChildPoliciesOverride: false
+      engineVersion: 1
+      skipSslVerification: true
+      timeout: 60
+      vaultCredentialId: "vault-jenkins-role"
+      vaultUrl: "http://vault:8200"
   injectionConfig:
     allowUntrusted: false
     checkForBuildAgentErrors: false

@@ -1,0 +1,27 @@
+ROLE_ID: {
+  "request_id": "7dbd17e8-2025-759f-91d2-729c8cefd116",
+  "lease_id": "",
+  "lease_duration": 0,
+  "renewable": false,
+  "data": {
+    "role_id": "1aa708ed-623b-2b65-dd07-eb037749b395"
+  },
+  "warnings": [
+    "Endpoint ignored these unrecognized parameters: [-format]"
+  ]
+}
+SECRET_ID: {
+  "request_id": "1e34b68b-5a93-8ec5-a1a5-4fe63adfe164",
+  "lease_id": "",
+  "lease_duration": 0,
+  "renewable": false,
+  "data": {
+    "secret_id": "04cc52a4-4749-e912-2724-6f1ff1ea0254",
+    "secret_id_accessor": "4cd3b190-8bc4-f8ea-321a-39046b323129",
+    "secret_id_num_uses": 0,
+    "secret_id_ttl": 0
+  },
+  "warnings": [
+    "Endpoint ignored these unrecognized parameters: [-format]"
+  ]
+}
