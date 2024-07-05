@@ -41,8 +41,12 @@ vault auth enable approle
 vault write auth/approle/role/jenkins-role token_num_uses=0 secret_id_num_uses=0 policies="jenkins"
 
 # Получаем и сохраняем Role ID и Secret ID в файл
-echo "ROLE_ID: $(vault read auth/approle/role/jenkins-role/role-id -format=json)" > /vault/jenkins_approle.file
-echo "SECRET_ID: $(vault write -f auth/approle/role/jenkins-role/secret-id -format=json)" >> /vault/jenkins_approle.file
+if [ -f /vault/jenkins_approle.file ]; then
+  echo "Jenkins_approle.file is already initialized"
+else
+  echo "ROLE_ID: $(vault read auth/approle/role/jenkins-role/role-id -format=json)" > /vault/jenkins_approle.file
+  echo "SECRET_ID: $(vault write -f auth/approle/role/jenkins-role/secret-id -format=json)" >> /vault/jenkins_approle.file
+fi
 
 # Создаем путь для секретов и добавляем секреты
 vault secrets enable -path=secrets kv
