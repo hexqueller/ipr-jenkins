@@ -52,6 +52,13 @@ credentials:
           path: "secrets/creds/jenkins"
           scope: GLOBAL
           usernameKey: "username"
+      - vaultStringCredentialImpl:
+          description: "vault-api"
+          engineVersion: 1
+          id: "vault-api"
+          path: "secrets/creds/api-key"
+          scope: GLOBAL
+          vaultKey: "secret"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
