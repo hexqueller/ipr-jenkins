@@ -44,6 +44,14 @@ credentials:
           scope: GLOBAL
           secretId: "2bfa21a5-0533-e777-93ae-dcbb3d275a07"
           usePolicies: false
+      - vaultUsernamePasswordCredentialImpl:
+          description: "vault-jenkins"
+          engineVersion: 1
+          id: "vault-jenkins"
+          passwordKey: "password"
+          path: "secrets/creds/jenkins"
+          scope: GLOBAL
+          usernameKey: "username"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
