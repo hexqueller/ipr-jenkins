@@ -2,22 +2,19 @@ pipeline {
     agent any
 
     environment {
-        // Получение секрета из Vault
-        API_TOKEN = vault(vaultId: 'my-vault-config',
-                          path: 'jenkins/api-token',
-                          engineVersion: '2',
-                          field: 'value')
+        VAULT_ADDR = 'http://vault:8200'
+        VAULT_CREDENTIALS_ID = 'vault-api'
     }
 
     stages {
-        stage('Example') {
+        stage('Retrieve Secret from Vault') {
             steps {
                 script {
-                    // Использование секрета в качестве переменной окружения
-                    echo "API token: ${env.API_TOKEN}"
+                    withCredentials([vaultString(credentialsId: VAULT_CREDENTIALS_ID, variable: 'SECRET_API')]) {
+                        echo "SECRET-API: ${SECRET_API}"
+                    }
                 }
             }
         }
     }
 }
-
