@@ -17,4 +17,6 @@ RUN chmod 744 /user/local/jenkins-config.yaml && \
     jenkins-plugin-cli --plugins workflow-aggregator && \
     jenkins-plugin-cli --plugins job-dsl && \
     jenkins-plugin-cli --plugins hashicorp-vault-plugin && \
-    jenkins-plugin-cli --plugins hashicorp-vault-pipeline
+    jenkins-plugin-cli --plugins hashicorp-vault-pipeline && \
+    jenkins-plugin-cli --plugins nexus-artifact-uploader && \
+    jenkins-plugin-cli --plugins pipeline-utility-steps
