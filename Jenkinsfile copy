@@ -5,14 +5,6 @@ pipeline {
         GRADLE_VERSION = '8.8'
         GRADLE_HOME = "${env.WORKSPACE}/gradle"
         PATH = "${GRADLE_HOME}/bin:${env.PATH}"
-
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "nexus:8081"
-        NEXUS_REPOSITORY = "WebApp"
-
-        NEXUS_CREDENTIAL_ID = "vault-jenkins"
-        ARTIFACT_VERSION = "${BUILD_NUMBER}"
     }
 
     triggers {
@@ -57,27 +49,15 @@ pipeline {
             }
         }
 
-        stage('Rename and Upload to Nexus') {
+        stage('Deploy') {
             steps {
-                echo 'Renaming artifact...'
-                sh 'mv /home/jenkins/build-repo/build/libs/build-repo-1.0.war /home/jenkins/build-repo/build/libs/myapp.war'
-                echo 'Uploading artifact to Nexus...'
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'myapp',
-                        classifier: '',
-                        file: '/home/jenkins/build-repo/build/libs/myapp.war',
-                        type: 'war'
-                    ]
-                ],
-                credentialsId: "${NEXUS_CREDENTIAL_ID}",
-                groupId: 'com.yourcompany',
-                nexusUrl: "${NEXUS_URL}",
-                nexusVersion: "${NEXUS_VERSION}",
-                protocol: "${NEXUS_PROTOCOL}",
-                repository: "${NEXUS_REPOSITORY}",
-                version: "${ARTIFACT_VERSION}"
-                echo 'Artifact uploaded to Nexus.'
+                echo 'Deploying application...'
+                sh '''
+                scp -o StrictHostKeyChecking=no /home/jenkins/build-repo/build/libs/build-repo-1.0.war root@tomcat:/usr/local/tomcat/webapps/
+                ssh -o StrictHostKeyChecking=no root@tomcat "mv /usr/local/tomcat/webapps/build-repo-1.0.war /usr/local/tomcat/webapps/myapp.war"
+                ssh -o StrictHostKeyChecking=no root@tomcat "/scripts/start-tomcat.sh"
+                '''
+                echo 'Deployment completed.'
             }
         }
     }
@@ -93,7 +73,7 @@ pipeline {
             echo 'Success!'
         }
         failure {
-            echo 'Build or upload failed.'
+            echo 'Build or deploy failed.'
         }
     }
 }
