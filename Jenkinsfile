@@ -11,7 +11,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([vaultString(credentialsId: VAULT_CREDENTIALS_ID, variable: 'SECRET_API')]) {
-                        sh 'echo SECRET-API: $SECRET_API'
+                        writeFile file: 'secret.txt', text: "${SECRET_API}"
+                        sh 'cat secret.txt'
                     }
                 }
             }
