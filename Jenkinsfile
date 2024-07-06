@@ -81,6 +81,7 @@ pipeline {
                 echo 'Artifact uploaded to Nexus.'
             }
         }
+    }
 
     post {
         always {
