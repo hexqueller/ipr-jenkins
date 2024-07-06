@@ -5,7 +5,7 @@ services:
     build: ./jenkinsCasC
     restart: always
     volumes:
-      - ./data:/var/jenkins_home:rw
+      - ./JenkinsHome:/var/jenkins_home:rw
     ports:
       - "8080:8080"
     environment:

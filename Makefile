@@ -1,7 +1,7 @@
 .SILENT:
 
 clean:
-	rm -rf data
+	rm -rf JenkinsHome
 
 run:
 	docker-compose down && docker-compose up
