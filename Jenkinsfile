@@ -12,7 +12,8 @@ pipeline {
         NEXUS_REPOSITORY = "WebApp"
 
         NEXUS_CREDENTIAL_ID = "vault-jenkins"
-        ARTIFACT_VERSION = "${BUILD_NUMBER}"
+        ARTIFACT_NAME = "myapp.war"
+        DOWNLOAD_DIR = "${env.WORKSPACE}/download"
     }
 
     triggers {
@@ -76,24 +77,23 @@ pipeline {
                 nexusVersion: "${NEXUS_VERSION}",
                 protocol: "${NEXUS_PROTOCOL}",
                 repository: "${NEXUS_REPOSITORY}",
-                version: "${ARTIFACT_VERSION}"
+                version: 'latest'
                 echo 'Artifact uploaded to Nexus.'
             }
         }
-    }
 
     post {
         always {
             echo 'Cleaning workspace...'
             dir("${env.WORKSPACE}") {
-                sh "rm -rf ${env.WORKSPACE}/* && rm -rf /tmp/gradle*"
+                sh "rm -rf ${DOWNLOAD_DIR}"
             }
         }
         success {
             echo 'Success!'
         }
         failure {
-            echo 'Build or upload failed.'
+            echo 'Download or deploy failed.'
         }
     }
 }
