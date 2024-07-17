@@ -2,47 +2,13 @@ credentials:
   system:
     domainCredentials:
     - credentials:
-      - basicSSHUserPrivateKey:
-          id: "2198bf1d-245a-4152-9255-9b6508bd4bc4"
-          privateKeySource:
-            directEntry:
-              privateKey: |
-                -----BEGIN RSA PRIVATE KEY-----
-                MIIEowIBAAKCAQEApQ4wovHG08MDxddPYeVqY6z0/A8rgdQ9jxvw6Q2s0WIgZ19B
-                ue7wZCVIkI94UelaziRz7kI1HFC8lxa+jjZFM8zLNeBQXpRSyQs1xFFeqC7rb22m
-                70qU32SB0I8N5/+wXQ6UUTEZxaJ25mUkxhL5vV6ax3+DDQ83aO4rghbuuOtgRKla
-                gHxP5xLvpPvqCmc+D00Bkj7CMFqCw8wkO4pc7PlFo9+5F/hkApNJrKA8jqoZYULg
-                Z8gFpzlvVXfM1tFlCogWTtGpfVX1zTcfYlVrHQIJ5VaL6r89tkYbj2UgPdiHsjEx
-                q0oXc60i58Ppt14M9ZIWucN55Tz+jTuDLy/yOwIDAQABAoIBAF2ffOsQZY18kslH
-                5hlLfltnodbP7AfKkdh5Kt+nCB4EoQjBuZBz/htwIocNOlyMFxvTBYdiOqoDCdZR
-                6mjUU9CcG7BFupDLZWHwX+Epnp2bb6RW+FfHYEaOxiu82VB9clZ2jJ65UTsPeo4Z
-                VRCddtd5sCX1KCriNLXqUveJdoOg5lEeDpjRbz530JxDXYp2R75ponQ20tdQMXxC
-                Vl6oYRRj2/7gJ25OJh4O0PS9xNKqIx7/0pULAwq3F/fBKj30ZbSgdnrUqJPkkkRq
-                lW8eWdzk0cZtJmJmstbCD8H684tqAZoYr3B0dxSDhA8ZGxKvLWeEU6UnLOj6vWiY
-                1QMeM4ECgYEA0RIsLcHWjc62qRD+9EMj82p8+HsSbv07TQzzBFUIDl0PD9MB00aX
-                /Zf7b2hqpxdeUUOTtLHUT7Kov6QjgBjgmQyE/yDmS7cOfyd04bHjW9GPKgtSSbyU
-                OVim1FXD+hCSWIlX1F1HpROpKJv/9jnjGB9M5LEFK+WbcaAv8PYZhdsCgYEAyhrB
-                YYfmOr92N3t1XZZQijOkxLHLaRIEotXMJWOXQe1Nt80Qe+1oW6T4hM6/Yup1tVll
-                1QDaTIK3UKcWjh1wS+VJyznMNzhMaCpKhsjzBiQNlSpcwjfGMI2vGZS0tczE9VNk
-                YRWfjzICZ1VGTFr9pf7D1K8TNxfHFFVjZ5wGYyECgYBKCHxaa6R1LLjj31/Y0Rme
-                7Zt5ReN+J+/i1e4MH6wtoeheeyLPVNUneLURe1EhABZnAl4Ag2QiIKq+yfnEN4r4
-                x0UlLto9/4GDp04tSZewAOIISmAGOl/meq0AzaoLF+kqrt/KFIn1O6QP/EXERDVV
-                amgJJ2IkbDcCIm43jn31NwKBgQCtBV7MynV1kff4477Ekiz9Q90pbzS/DOffJ72P
-                vMT/cdL5KZuVHNgcrQz9VapPWn3O9WvSgNpiaf3aFFGg9N7weqlETITiOVZgTuRi
-                o6I6fZ8LNqsWsnz/kCx5b++NPHLZu7zRyJtDEgMwx7ZZJATGmWa5q/B9V+PdKoTh
-                bJejQQKBgGr+oRBYtZgHBvubITHN26VvhBXO6uLF3JALwIZ9qwdcAZ4HPRguaxoP
-                6a2Y4+JQKlQ+O1IaiPqrC5vynuVoypoCwvYp4c7BAx6YGyiXQuetj/j1BAeXBIi5
-                F3GybP2Hdv48xCEBLWlJHzQWP/fke0OnUmZB8YLFq+Qx+LPqsGAz
-                -----END RSA PRIVATE KEY-----
-          scope: GLOBAL
-          username: "jenkins"
       - vaultAppRoleCredential:
           description: "vault-jenkins-role"
           id: "vault-jenkins-role"
           path: "approle"
-          roleId: "1aa708ed-623b-2b65-dd07-eb037749b395"
+          roleId: "d7d9ec5e-ff97-a4b9-535a-4a10769534ed"
           scope: GLOBAL
-          secretId: "2bfa21a5-0533-e777-93ae-dcbb3d275a07"
+          secretId: "fff750cb-192f-c9ef-148a-05aada3b0ea4"
           usePolicies: false
       - vaultUsernamePasswordCredentialImpl:
           description: "vault-jenkins"
@@ -59,6 +25,16 @@ credentials:
           path: "secrets/creds/api-key"
           scope: GLOBAL
           vaultKey: "secret"
+      - vaultSSHUserPrivateKeyImpl:
+          description: "ssh_key"
+          engineVersion: 1
+          id: "ssh_key"
+          passphraseKey: "passphrase"
+          path: "secrets/ssh/jenkins"
+          privateKeyKey: "private_key"
+          scope: GLOBAL
+          usernameKey: "jenkins"
+
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -92,7 +68,7 @@ jenkins:
   - permanent:
       launcher:
         ssh:
-          credentialsId: "2198bf1d-245a-4152-9255-9b6508bd4bc4"
+          credentialsId: "ssh_key"
           host: "docker-ssh-agent"
           port: 22
           sshHostKeyVerificationStrategy:
@@ -216,7 +192,7 @@ jobs:
           branchSources {
               git {
                   id = 'master-git'
-                  remote('https://github.com/hexqueller/IPR.git')
+                  remote('https://github.com/hexqueller/ipr_jenkins.git')
               }
           }
       }

@@ -1,23 +1,23 @@
 ROLE_ID: {
-  "request_id": "622943c3-eac9-7ab2-8720-c298d7246bbc",
+  "request_id": "9807327b-85e1-7f32-6d65-764c3c4be4cc",
   "lease_id": "",
   "lease_duration": 0,
   "renewable": false,
   "data": {
-    "role_id": "1aa708ed-623b-2b65-dd07-eb037749b395"
+    "role_id": "d7d9ec5e-ff97-a4b9-535a-4a10769534ed"
   },
   "warnings": [
     "Endpoint ignored these unrecognized parameters: [-format]"
   ]
 }
 SECRET_ID: {
-  "request_id": "b838adb6-95ab-1779-9d8b-5cd6b5d1d63c",
+  "request_id": "450ab8d5-58cd-010d-054e-0aa4bf931e8e",
   "lease_id": "",
   "lease_duration": 0,
   "renewable": false,
   "data": {
-    "secret_id": "339c5559-1b2e-9f22-e95f-dfb9ba98a466",
-    "secret_id_accessor": "5a271cac-c79a-9002-19b0-6fe18f0c6065",
+    "secret_id": "fff750cb-192f-c9ef-148a-05aada3b0ea4",
+    "secret_id_accessor": "506d901d-9938-fb13-d594-17d0875b590a",
     "secret_id_num_uses": 0,
     "secret_id_ttl": 0
   },
@@ -25,3 +25,4 @@ SECRET_ID: {
     "Endpoint ignored these unrecognized parameters: [-format]"
   ]
 }
+ROOT_TOKEN: hvs.DjLEYViuTfv0yNNiKVTVytl5

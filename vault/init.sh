@@ -46,12 +46,14 @@ if [ -f /vault/jenkins_approle.file ]; then
 else
   echo "ROLE_ID: $(vault read auth/approle/role/jenkins-role/role-id -format=json)" > /vault/jenkins_approle.file
   echo "SECRET_ID: $(vault write -f auth/approle/role/jenkins-role/secret-id -format=json)" >> /vault/jenkins_approle.file
+  echo "ROOT_TOKEN: $VAULT_ROOT_TOKEN" >> /vault/jenkins_approle.file
 fi
 
 # Создаем путь для секретов и добавляем секреты
 vault secrets enable -path=secrets kv
 vault write secrets/creds/jenkins username=jenkins password=jenkins
 vault write secrets/creds/api-key secret=SuperDuperSecretApiKey
+vault write secrets/ssh/jenkins private_key=@/vault/id_rsa
 
 # Загружаем политику
 vault policy write jenkins vault/jenkins-policy.hcl

@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GRADLE_VERSION = '8.8'
-        GRADLE_HOME = "${env.WORKSPACE}/gradle"
+        GRADLE_HOME = "/opt/gradle/gradle-${GRADLE_VERSION}"
         PATH = "${GRADLE_HOME}/bin:${env.PATH}"
 
         NEXUS_VERSION = "nexus3"
@@ -21,19 +21,6 @@ pipeline {
     }
 
     stages {
-        stage('Install Gradle') {
-            steps {
-                echo 'Installing Gradle...'
-                sh '''
-                wget -P /tmp https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
-                unzip /tmp/gradle-${GRADLE_VERSION}-bin.zip -d /tmp
-                mv /tmp/gradle-${GRADLE_VERSION} ${GRADLE_HOME}
-                ls -la ${GRADLE_HOME}/bin
-                '''
-                echo 'Gradle installed.'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo 'Checking out build repository...'
