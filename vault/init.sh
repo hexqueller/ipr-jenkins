@@ -44,8 +44,11 @@ vault write auth/approle/role/jenkins-role token_num_uses=0 secret_id_num_uses=0
 if [ -f /vault/jenkins_approle.file ]; then
   echo "Jenkins_approle.file is already initialized"
 else
-  echo "ROLE_ID: $(vault read auth/approle/role/jenkins-role/role-id -format=json)" > /vault/jenkins_approle.file
-  echo "SECRET_ID: $(vault write -f auth/approle/role/jenkins-role/secret-id -format=json)" >> /vault/jenkins_approle.file
+  ROLE_ID=$(vault read auth/approle/role/jenkins-role/role-id -format=json | grep '"role_id"' | sed -E 's/.*"role_id": "(.*)".*/\1/')
+  SECRET_ID=$(vault write -f auth/approle/role/jenkins-role/secret-id -format=json | grep '"secret_id"' | sed -E 's/.*"secret_id": "(.*)".*/\1/')
+
+  echo "ROLE_ID: ${ROLE_ID}" > /vault/jenkins_approle.file
+  echo "SECRET_ID: ${SECRET_ID}" >> /vault/jenkins_approle.file
   echo "ROOT_TOKEN: $VAULT_ROOT_TOKEN" >> /vault/jenkins_approle.file
 fi
 
