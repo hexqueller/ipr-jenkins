@@ -56,7 +56,6 @@ fi
 vault secrets enable -path=secrets kv
 vault write secrets/creds/jenkins username=jenkins password=jenkins
 vault write secrets/creds/api-key secret=SuperDuperSecretApiKey
-vault write secrets/ssh/jenkins private_key=@/vault/id_rsa
 
 # Загружаем политику
 vault policy write jenkins vault/jenkins-policy.hcl
