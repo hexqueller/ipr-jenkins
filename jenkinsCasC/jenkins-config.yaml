@@ -25,15 +25,6 @@ credentials:
           path: "secrets/creds/api-key"
           scope: GLOBAL
           vaultKey: "secret"
-      - vaultSSHUserPrivateKeyImpl:
-          description: "ssh_key"
-          engineVersion: 1
-          id: "ssh_key"
-          passphraseKey: "passphrase"
-          path: "secrets/ssh/jenkins"
-          privateKeyKey: "private_key"
-          scope: GLOBAL
-          usernameKey: "jenkins"
 
 jenkins:
   agentProtocols:
@@ -66,17 +57,9 @@ jenkins:
   - "responseTime"
   nodes:
   - permanent:
-      launcher:
-        ssh:
-          credentialsId: "ssh_key"
-          host: "docker-ssh-agent"
-          port: 22
-          sshHostKeyVerificationStrategy:
-            manuallyTrustedKeyVerificationStrategy:
-              requireInitialManualTrust: false
-      name: "docker-agent01"
-      numExecutors: 2
-      remoteFS: "/home/jenkins"
+      launcher: "inbound"
+      name: "jnpl-agent"
+      remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
   numExecutors: 0
   primaryView:

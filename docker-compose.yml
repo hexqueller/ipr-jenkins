@@ -11,15 +11,13 @@ services:
     environment:
       - CASC_JENKINS_CONFIG=/user/local/jenkins-config.yaml
       - TZ=Europe/Moscow
-    depends_on:
-      - jnlp-agent
 
   jnlp-agent:
     build: ./jnlp-agent
     restart: always
-    environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClDjCi8cbTwwPF109h5WpjrPT8DyuB1D2PG/DpDazRYiBnX0G57vBkJUiQj3hR6VrOJHPuQjUcULyXFr6ONkUzzMs14FBelFLJCzXEUV6oLutvbabvSpTfZIHQjw3n/7BdDpRRMRnFonbmZSTGEvm9XprHf4MNDzdo7iuCFu6462BEqVqAfE/nEu+k++oKZz4PTQGSPsIwWoLDzCQ7ilzs+UWj37kX+GQCk0msoDyOqhlhQuBnyAWnOW9Vd8zW0WUKiBZO0al9VfXNNx9iVWsdAgnlVovqvz22RhuPZSA92IeyMTGrShdzrSLnw+m3Xgz1kha5w3nlPP6NO4MvL/I7
-  
+    depends_on:
+    - jenkins 
+
   tomcat:
     build: ./tomcat
     restart: always
@@ -33,9 +31,6 @@ services:
     restart: always
     ports:
       - "8200:8200"
-    environment:
-      - VAULT_LOCAL_CONFIG=/vault/config.hcl
-    command: sh -c "vault server -config=/vault/config.hcl & sleep 5 && sh /vault/init.sh; tail -f /dev/null"
     cap_add:
       - IPC_LOCK
     depends_on:

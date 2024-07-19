@@ -9,7 +9,6 @@ COPY jenkins-config.yaml /user/local/jenkins-config.yaml
 
 # Установка плагинов
 RUN chmod 744 /user/local/jenkins-config.yaml && \
-    jenkins-plugin-cli --plugins ssh-slaves && \
     jenkins-plugin-cli --plugins configuration-as-code && \
     jenkins-plugin-cli --plugins dark-theme && \
     jenkins-plugin-cli --plugins git && \
