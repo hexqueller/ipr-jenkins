@@ -39,7 +39,7 @@ jenkins:
   - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
-  - name: "docker-agent01"
+  - name: "jnpl-agent"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -70,6 +70,12 @@ jenkins:
   remotingSecurity:
     enabled: true
   scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+        allowsSignup: false
+        users: 
+            - id: jenkins-admin
+              password: admin
   slaveAgentPort: 50000
   systemMessage: "CasC enabled!"
   updateCenter:
