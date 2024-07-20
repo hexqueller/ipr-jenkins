@@ -3,7 +3,7 @@ FROM jenkins/jenkins
 USER root
 ARG JAVA_OPTS
 ENV JENKINS_HOME /var/jenkins_home
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true ${JAVA_OPTS:-}"
 
 COPY jenkins-config.yaml /user/local/jenkins-config.yaml
 

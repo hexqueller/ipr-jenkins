@@ -74,21 +74,11 @@ EOF
 JENKINS_URL="http://jenkins:8080"
 JENKINS_USER="jenkins-admin"
 JENKINS_PASSWORD="admin"
+VAULT_CREDENTIAL_ID="vault-jenkins-role"
 
 # Получаем CSRF-токен и поле токена
 CRUMB_RESPONSE=$(curl -s -u "$JENKINS_USER:$JENKINS_PASSWORD" "$JENKINS_URL/crumbIssuer/api/json")
 CRUMB=$(echo $CRUMB_RESPONSE | jq -r '.crumb')
-CRUMB_FIELD=$(echo $CRUMB_RESPONSE | jq -r '.crumbRequestField')
-
-# Проверка значений
-echo "CRUMB: $CRUMB"
-echo "CRUMB_FIELD: $CRUMB_FIELD"
-
-# Получаем ID существующей записи
-VAULT_CREDENTIAL_ID=$(curl -s -u "$JENKINS_USER:$JENKINS_PASSWORD" "$JENKINS_URL/credentials/store/system/domain/_/credential/vaultAppRoleCredential/config.xml" | grep '<id>' | sed -E 's/.*<id>(.*)<\/id>.*/\1/')
-
-# Проверка значения ID
-echo "VAULT_CREDENTIAL_ID: $VAULT_CREDENTIAL_ID"
 
 # Обновляем vaultAppRoleCredential
-curl -X POST -u "$JENKINS_USER:$JENKINS_PASSWORD" -H "$CRUMB_FIELD:$CRUMB" --data-urlencode "json=$VAULT_CREDENTIALS" "$JENKINS_URL/credentials/store/system/domain/_/credential/$VAULT_CREDENTIAL_ID/config.xml"
+curl -X POST -u "$JENKINS_USER:$JENKINS_PASSWORD" -H "Jenkins-Crumb: $CRUMB" --data-urlencode "json=$VAULT_CREDENTIALS" "$JENKINS_URL/credentials/store/system/domain/_/credential/$VAULT_CREDENTIAL_ID/config.xml"
