@@ -68,6 +68,18 @@ pipeline {
                 echo 'Artifact uploaded to Nexus.'
             }
         }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh '''
+                scp -o StrictHostKeyChecking=no /home/jenkins/build-repo/build/libs/myapp.war root@tomcat:/usr/local/tomcat/webapps/
+                ssh -o StrictHostKeyChecking=no root@tomcat "/scripts/stop-tomcat.sh"
+                ssh -o StrictHostKeyChecking=no root@tomcat "/scripts/start-tomcat.sh"
+                '''
+                echo 'Deployment completed.'
+            }
+        }
     }
 
     post {
