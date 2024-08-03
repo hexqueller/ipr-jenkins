@@ -13,7 +13,6 @@ pipeline {
 
         NEXUS_CREDENTIAL_ID = "vault-jenkins"
         ARTIFACT_NAME = "myapp.war"
-        DOWNLOAD_DIR = "${env.WORKSPACE}/download"
     }
 
     triggers {
@@ -68,7 +67,7 @@ pipeline {
                 echo 'Artifact uploaded to Nexus.'
             }
         }
-        
+
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
@@ -83,17 +82,11 @@ pipeline {
     }
 
     post {
-        always {
-            echo 'Cleaning workspace...'
-            dir("${env.WORKSPACE}") {
-                sh "rm -rf ${DOWNLOAD_DIR}"
-            }
-        }
         success {
             echo 'Success!'
         }
         failure {
-            echo 'Download or deploy failed.'
+            echo 'Failure!'
         }
     }
 }
