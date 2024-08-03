@@ -10,4 +10,7 @@ COPY plugins /user/local/plugins.txt
 
 # Установка плагинов
 RUN chmod 744 /user/local/jenkins-config.yaml && \
-    jenkins-plugin-cli --plugin-file /user/local/plugins.txt
+    jenkins-plugin-cli --plugin-file /user/local/plugins.txt && \
+    mkdir -p /usr/share/jenkins/ref/init.groovy.d
+
+COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/init.groovy

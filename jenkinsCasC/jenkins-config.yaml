@@ -39,7 +39,6 @@ jenkins:
   - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
-  - name: "jnpl-agent"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -55,12 +54,6 @@ jenkins:
       freeSpaceThreshold: "1GiB"
       freeSpaceWarningThreshold: "2GiB"
   - "responseTime"
-  nodes:
-  - permanent:
-      launcher: "inbound"
-      name: "jnpl-agent"
-      remoteFS: "/home/jenkins/agent"
-      retentionStrategy: "always"
   numExecutors: 0
   primaryView:
     all:
@@ -72,8 +65,9 @@ jenkins:
   scmCheckoutRetryCount: 0
   securityRealm:
     local:
-        allowsSignup: false
-        users: 
+      allowsSignup: false
+      enableCaptcha: false
+      users:
             - id: jenkins-admin
               password: admin
   slaveAgentPort: 50000
@@ -101,6 +95,8 @@ security:
     creationOfLegacyTokenEnabled: false
     tokenGenerationOnCreationEnabled: false
     usageStatisticsEnabled: true
+  cps:
+    hideSandbox: false
   gitHooks:
     allowedOnAgents: false
     allowedOnController: false
