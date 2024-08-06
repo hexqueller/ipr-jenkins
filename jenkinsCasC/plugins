@@ -8,4 +8,3 @@ hashicorp-vault-plugin
 hashicorp-vault-pipeline
 nexus-artifact-uploader
 pipeline-utility-steps
-init.groovy.d
