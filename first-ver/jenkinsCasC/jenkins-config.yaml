@@ -147,7 +147,7 @@ unclassified:
     injectMavenExtension: false
     mavenCaptureGoalInputFiles: true
   location:
-    adminAddress: "dima.nesed@gmail.com"
+    adminAddress: "адрес еще не настроен <nobody@nowhere>"
     url: "http://localhost:8080/"
   mailer:
     charset: "UTF-8"

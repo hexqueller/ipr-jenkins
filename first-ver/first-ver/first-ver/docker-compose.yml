@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+
+  jenkins:
+    build: ./jenkinsCasC
+    restart: always
+    volumes:
+      - ./JenkinsHome:/var/jenkins_home:rw
+    ports:
+      - "8080:8080"
+    environment:
+      - CASC_JENKINS_CONFIG=/user/local/jenkins-config.yaml
+      - TZ=Europe/Moscow
+
+  jnlp-agent:
+    build: ./jnlp-agent
+    restart: always
+    depends_on:
+    - jenkins 
+
+  tomcat:
+    build: ./tomcat
+    restart: always
+    ports:
+      - "80:8080"
+    depends_on:
+      - jenkins
+
+  vault:
+    build: ./vault
+    restart: always
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    depends_on:
+      - jenkins
+
+  nexus:
+    image: sonatype/nexus3:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./nexus:/scripts
+    entrypoint: ["/bin/bash", "-c", "/opt/sonatype/nexus/bin/nexus run & /scripts/nexus-setup.sh & wait"]

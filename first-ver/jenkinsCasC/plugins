@@ -1,0 +1,10 @@
+configuration-as-code
+dark-theme
+git
+gradle
+workflow-aggregator
+job-dsl
+hashicorp-vault-plugin
+hashicorp-vault-pipeline
+nexus-artifact-uploader
+pipeline-utility-steps
