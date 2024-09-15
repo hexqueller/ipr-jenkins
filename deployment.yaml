@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jekinsCasC
+spec:
+  selector:
+    matchLabels:
+      app: jekinsCasC
+  template:
+    metadata:
+      labels:
+        app: jekinsCasC
+    spec:
+      containers:
+      - name: jekinsCasC
+        image: hexqueller/jenkinscasc
+        resources:
+          limits:
+            memory: "512i"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
