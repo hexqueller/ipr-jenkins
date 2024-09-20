@@ -4,6 +4,8 @@ USER root
 ARG JAVA_OPTS
 ENV JENKINS_HOME /var/jenkins_home
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true ${JAVA_OPTS:-}"
+ENV CASC_JENKINS_CONFIG=/user/local/jenkins-config.yaml
+ENV TZ=Europe/Moscow
 
 COPY jenkins-config.yaml /user/local/jenkins-config.yaml
 COPY plugins /user/local/plugins.txt
