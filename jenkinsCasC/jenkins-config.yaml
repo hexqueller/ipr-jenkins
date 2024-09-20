@@ -2,19 +2,32 @@ jenkins:
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsTunnel: "jenkins-agent.jenkins.svc.cluster.local:50000"
+      jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+      name: "Kubernetes"
+      namespace: "jenkins"
+      serverUrl: "https://kubernetes.default"
+      templates:
+      - id: "18d43eb0-0107-47b0-8e14-b96b18044492"
+        label: "jenkins-agent"
+        name: "jenkins-agent"
+        namespace: "jenkins"
+        nodeUsageMode: "NORMAL"
+        yamlMergeStrategy: "override"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
-  disabledAdministrativeMonitors:
-  - "jenkins.diagnostics.SecurityIsOffMonitor"
-  - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
+  - name: "jenkins-agent"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
-  noUsageStatistics: true
   nodeMonitors:
   - "architecture"
   - "clock"
@@ -74,45 +87,28 @@ security:
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
     sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
-  globalJobDslSecurityConfiguration:
-    useScriptSecurity: true
 unclassified:
+  bitbucketEndpointConfiguration:
+    endpoints:
+    - bitbucketCloudEndpoint:
+        enableCache: false
+        manageHooks: false
+        repositoriesCacheDuration: 0
+        teamCacheDuration: 0
   buildDiscarders:
     configuredBuildDiscarders:
     - "jobBuildDiscarder"
-  enrichedSummaryConfig:
-    enrichedSummaryEnabled: false
-    httpClientDelayBetweenRetriesInSeconds: 1
-    httpClientMaxRetries: 3
-    httpClientTimeoutInSeconds: 1
   fingerprints:
     fingerprintCleanupDisabled: false
     storage: "file"
-  globalLibraries:
-    libraries:
-    - defaultVersion: "master"
-      name: "default-lib"
-      retriever:
-        modernSCM:
-          libraryPath: "./"
-          scm:
-            git:
-              id: "4df5e90d-b0a0-4b32-9ffc-992c26149341"
-              remote: "https://github.com/hexqueller/IPR.git"
-              traits:
-              - "gitBranchDiscovery"
-  injectionConfig:
-    allowUntrusted: false
-    checkForBuildAgentErrors: false
-    enabled: false
-    enforceUrl: false
-    gradleCaptureTaskInputFiles: true
-    injectCcudExtension: false
-    injectMavenExtension: false
-    mavenCaptureGoalInputFiles: true
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    hookUrl: "http://127.0.0.1:8080/github-webhook/"
+  junitTestResultStorage:
+    storage: "file"
   location:
-    adminAddress: "dima.nesed@gmail.com"
-    url: "http://localhost:8080/"
+    adminAddress: "address not configured yet <nobody@nowhere>"
   mailer:
     charset: "UTF-8"
     useSsl: false
@@ -135,13 +131,3 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
-jobs:
-  - script: >
-      multibranchPipelineJob('master-git') {
-          branchSources {
-              git {
-                  id = 'master-git'
-                  remote('https://github.com/hexqueller/ipr_jenkins.git')
-              }
-          }
-      }
