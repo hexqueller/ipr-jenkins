@@ -1,22 +1,93 @@
-apiVersion: apps/v1
-kind: Deployment
+# Service account docs:
+# https://support.cloudbees.com/hc/en-us/articles/360038636511-Kubernetes-Plugin-Authenticate-with-a-ServiceAccount-to-a-remote-cluster
+---
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: jekinsCasC
-spec:
-  selector:
-    matchLabels:
-      app: jekinsCasC
+  name: jenkins
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: jenkins
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get","list","watch"]
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["watch"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jenkins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jenkins
+subjects:
+- kind: ServiceAccount
+  name: jenkins
+---
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: jenkins 
+spec: 
+  replicas: 1 
+  selector: 
+    matchLabels: 
+      app: jenkins 
   template:
     metadata:
       labels:
-        app: jekinsCasC
+        app: jenkins
     spec:
       containers:
-      - name: jekinsCasC
+      - name: jenkins 
         image: hexqueller/jenkinscasc
-        resources:
-          limits:
-            memory: "512i"
-            cpu: "500m"
         ports:
         - containerPort: 8080
+        - containerPort: 50000
+        volumeMounts: 
+        - name: jenkins-home
+          mountPath: /var/jenkins_home 
+      volumes:
+      - name: jenkins-home 
+        emptyDir: { } 
+      serviceAccountName: jenkins
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: jenkins 
+spec: 
+  type: NodePort 
+  ports: 
+  - port: 8080 
+    targetPort: 8080 
+  selector: 
+    app: jenkins
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-agent
+spec:
+  selector: 
+    app: jenkins
+  type: NodePort  
+  ports:
+    - port: 50000
+      targetPort: 50000
